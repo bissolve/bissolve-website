@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Bissolve</title>
+  <meta name="description" content="Book a free consultation with Bissolve. One conversation is all it takes to figure out where we can help." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/pages.css">
+</head>
+<body>
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo"><img src="/assets/bissolve-logo.png" alt="Bissolve" class="logo-img" /></a>
+      <nav class="nav-links">
+        <a href="/services.html">Services</a>
+        <a href="/work.html">Work</a>
+        <a href="/about.html">About</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/contact.html" class="nav-active">Contact</a>
+      </nav>
+      <div class="header-actions"><button class="nav-cta-btn" onclick="location.href='/contact.html'">Let's Talk →</button></div>
+      <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="/services.html">Services</a><a href="/work.html">Work</a><a href="/about.html">About</a><a href="/blog.html">Blog</a><a href="/contact.html">Contact</a>
+      <button class="nav-cta-btn" style="margin-top:1rem;width:100%">Let's Talk →</button>
+    </div>
+  </header>
+
+  <section class="page-hero page-hero--short">
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb reveal">Contact Us</div>
+      <h1 class="page-headline reveal">Let's figure out<br/>what you need.</h1>
+      <p class="page-subtext reveal">One honest conversation about your business. No pitch, no pressure — just a clear look at where technology can help.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <div class="contact-inner">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap reveal">
+        <h2 class="contact-form-heading">Tell us about your project</h2>
+        <p class="contact-form-sub">Fill in the form and we'll get back to you within one business day.</p>
+
+        <form class="contact-form" id="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your name</label>
+              <input type="text" id="name" name="name" placeholder="James Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="james@company.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="business">Business name</label>
+              <input type="text" id="business" name="business" placeholder="Your Company Ltd" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone / WhatsApp</label>
+              <input type="tel" id="phone" name="phone" placeholder="+44 7000 000000" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">What are you looking for?</label>
+            <select id="service" name="service">
+              <option value="" disabled selected>Select a service</option>
+              <option>AI Voice Agents &amp; Chatbots</option>
+              <option>CRM Management</option>
+              <option>Business Automation</option>
+              <option>Website &amp; Web Application</option>
+              <option>Mobile App Development</option>
+              <option>E-Commerce</option>
+              <option>Brand Identity</option>
+              <option>Multiple / Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Tell us about your business</label>
+            <textarea id="message" name="message" rows="5" placeholder="What does your business do, what's the challenge you're facing, and what outcome are you hoping for?"></textarea>
+          </div>
+
+          <button type="submit" class="primary-btn contact-submit-btn">Send message →</button>
+
+          <div class="form-success" id="form-success">
+            <span>✓</span> Thanks! We'll be in touch within one business day.
+          </div>
+        </form>
+      </div>
+
+      <!-- SIDE INFO -->
+      <div class="contact-info reveal">
+        <div class="contact-method">
+          <div class="contact-method-icon">✉️</div>
+          <div>
+            <strong>Email us</strong>
+            <a href="mailto:hello@bissolve.com">hello@bissolve.com</a>
+            <span>We reply within one business day.</span>
+          </div>
+        </div>
+
+        <div class="contact-method">
+          <div class="contact-method-icon">💬</div>
+          <div>
+            <strong>WhatsApp</strong>
+            <a href="#">Message us directly</a>
+            <span>Faster for quick questions.</span>
+          </div>
+        </div>
+
+        <div class="contact-method">
+          <div class="contact-method-icon">🌐</div>
+          <div>
+            <strong>Website</strong>
+            <a href="https://bissolve.com" target="_blank">bissolve.com</a>
+          </div>
+        </div>
+
+        <div class="contact-divider"></div>
+
+        <!-- FAQ -->
+        <div class="contact-faq">
+          <h3>Common questions</h3>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              How long does a project take? <span class="faq-arrow">↓</span>
+            </button>
+            <div class="faq-a">
+              It depends on scope. A brand identity takes 2–3 weeks. A website takes 3–5 weeks. A CRM buildout takes 2–4 weeks. An app takes 6–12 weeks. We'll give you a specific timeline in the scoping call.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Do you work with businesses outside the UK? <span class="faq-arrow">↓</span>
+            </button>
+            <div class="faq-a">
+              Yes — we work with businesses globally. Most of our work is done remotely, and we're experienced working across time zones.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              What happens after the free consultation? <span class="faq-arrow">↓</span>
+            </button>
+            <div class="faq-a">
+              We'll come back with a clear proposal — what we'll build, how long it takes, and what it costs. No vague estimates, no hidden extras.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Do you offer ongoing support? <span class="faq-arrow">↓</span>
+            </button>
+            <div class="faq-a">
+              Yes. We offer ongoing support and maintenance for everything we build — because good technology needs someone who knows how it was built.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col footer-brand">
+          <a href="/" class="logo footer-logo"><img src="/assets/bissolve-logo.png" alt="Bissolve" class="logo-img logo-img--footer" /></a>
+          <p class="footer-tagline-slogan">Let's Solve It.</p>
+          <p class="footer-tagline">Technology solutions for businesses built to grow.</p>
+        </div>
+        <div class="footer-col"><h5>Quick Links</h5><ul><li><a href="/">Home</a></li><li><a href="/about.html">About</a></li><li><a href="/work.html">Work</a></li><li><a href="/blog.html">Blog</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h5>Services</h5><ul><li><a href="/services.html#ai-agents">AI Voice Agents</a></li><li><a href="/services.html#crm">CRM Management</a></li><li><a href="/services.html#automation">Business Automation</a></li><li><a href="/services.html#web">Website &amp; Web Apps</a></li><li><a href="/services.html#mobile">Mobile Apps</a></li></ul></div>
+        <div class="footer-col"><h5>Contact</h5><ul><li><a href="mailto:hello@bissolve.com">hello@bissolve.com</a></li><li><a href="#">WhatsApp Us</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Bissolve. All rights reserved.</p>
+        <div class="footer-legal-links"><a href="#">Privacy Policy</a><span>·</span><a href="#">Terms of Use</a></div>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">BISSOLVE</div>
+  </footer>
+
+  <script type="module" src="/src/pages.js"></script>
+</body>
+</html>
