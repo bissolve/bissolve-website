@@ -281,21 +281,23 @@ canvas#particles {
   animation: slideUpReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Character-level stagger reveal (Antigravity style) */
-.char-mask {
-  display: inline-block;
-  overflow: hidden;
-  padding-bottom: 0.1em;
-  margin-bottom: -0.1em;
-  vertical-align: bottom;
+/* Typewriter Reveal */
+.typewriter-reveal {
+  opacity: 0; /* Hidden until JS initiates */
 }
-.char-slide {
+.typewriter-cursor {
   display: inline-block;
-  transform: translateY(115%);
-  animation: slideUpReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  width: 4px;
+  height: 1em;
+  background-color: var(--navy);
+  vertical-align: text-bottom;
+  margin-left: 6px;
+  border-radius: 2px;
+  animation: blinkCursor 0.8s step-end infinite;
 }
-.split-text-reveal {
-  opacity: 0; /* Hidden until JS splits it to prevent FOUC */
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .animate-fade-up {

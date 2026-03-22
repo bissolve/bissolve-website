@@ -1,49 +1,45 @@
-// ── Split Text Reveal (Antigravity Style) ─────────────────
-function initSplitText() {
-  const elements = document.querySelectorAll('.split-text-reveal');
-  elements.forEach((el, index) => {
-    // Determine a base delay based on the element's order or custom attribute
-    const baseDelay = parseFloat(el.getAttribute('data-delay')) || 0;
+// ── Typewriter Reveal Effect ────────────────────────────────
+function initTypewriter() {
+  const elements = document.querySelectorAll('.typewriter-reveal');
+  elements.forEach((el) => {
+    // Clean up source formatting whitespace
+    const html = el.innerHTML.replace(/\s*<br\s*\/?>\s*/gi, '<br>').trim();
+    // Match HTML tags or individual characters
+    const tokens = html.match(/(<[^>]+>|.)/g) || [];
     
-    // Get the HTML content, but we need to split only text nodes to preserve <br>
-    const textNodes = Array.from(el.childNodes);
-    el.innerHTML = ''; // clear original
-    
-    let charIndex = 0;
-    textNodes.forEach(node => {
-      if (node.nodeName === 'BR') {
-        el.appendChild(document.createElement('br'));
-      } else if (node.nodeType === 3) { // Text node
-        const chars = node.textContent.split('');
-        chars.forEach(char => {
-          if (char === ' ') {
-            el.appendChild(document.createTextNode(' '));
-          } else {
-            const mask = document.createElement('span');
-            mask.className = 'char-mask';
-            
-            const slide = document.createElement('span');
-            slide.className = 'char-slide';
-            slide.textContent = char;
-            
-            // Stagger each character by 20ms, starting after the base delay
-            const delay = baseDelay + (charIndex * 0.025);
-            slide.style.animationDelay = delay + 's';
-            
-            mask.appendChild(slide);
-            el.appendChild(mask);
-            charIndex++;
-          }
-        });
-      }
-    });
-    // Unhide the original container once set up
+    el.innerHTML = ''; 
     el.style.opacity = '1';
+    
+    const cursor = document.createElement('span');
+    cursor.className = 'typewriter-cursor';
+    el.appendChild(cursor);
+
+    let i = 0;
+    function typeNext() {
+      if (i < tokens.length) {
+        const token = tokens[i];
+        if (token.startsWith('<')) {
+          cursor.insertAdjacentHTML('beforebegin', token);
+        } else {
+          cursor.insertAdjacentText('beforebegin', token);
+        }
+        i++;
+        // Randomize typing speed for realism (30ms - 70ms)
+        const delay = token === ' ' ? 20 : 30 + Math.random() * 40;
+        setTimeout(typeNext, delay);
+      } else {
+        // Hide cursor after a few seconds when finished
+        setTimeout(() => cursor.style.display = 'none', 3000);
+      }
+    }
+    
+    // Start typing after a brief delay
+    setTimeout(typeNext, 300);
   });
 }
 
 // Run immediately before Three.js
-initSplitText();
+initTypewriter();
 
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
