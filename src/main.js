@@ -1,41 +1,52 @@
 // ── Typewriter Reveal Effect ────────────────────────────────
 function initTypewriter() {
   const elements = document.querySelectorAll('.typewriter-reveal');
-  elements.forEach((el) => {
-    // Clean up source formatting whitespace
-    const html = el.innerHTML.replace(/\s*<br\s*\/?>\s*/gi, '<br>').trim();
-    // Match HTML tags or individual characters
-    const tokens = html.match(/(<[^>]+>|.)/g) || [];
-    
-    el.innerHTML = ''; 
-    el.style.opacity = '1';
-    
-    const cursor = document.createElement('span');
-    cursor.className = 'typewriter-cursor';
-    el.appendChild(cursor);
+  
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        // Clean up source formatting whitespace
+        const html = el.innerHTML.replace(/\s*<br\s*\/?>\s*/gi, '<br>').trim();
+        // Match HTML tags or individual characters
+        const tokens = html.match(/(<[^>]+>|.)/g) || [];
+        
+        el.innerHTML = ''; 
+        el.style.opacity = '1';
+        
+        const cursor = document.createElement('span');
+        cursor.className = 'typewriter-cursor';
+        el.appendChild(cursor);
 
-    let i = 0;
-    function typeNext() {
-      if (i < tokens.length) {
-        const token = tokens[i];
-        if (token.startsWith('<')) {
-          cursor.insertAdjacentHTML('beforebegin', token);
-        } else {
-          cursor.insertAdjacentText('beforebegin', token);
+        let i = 0;
+        function typeNext() {
+          if (i < tokens.length) {
+            const token = tokens[i];
+            if (token.startsWith('<')) {
+              cursor.insertAdjacentHTML('beforebegin', token);
+            } else {
+              cursor.insertAdjacentText('beforebegin', token);
+            }
+            i++;
+            // Randomize typing speed for realism (30ms - 70ms)
+            const delay = token === ' ' ? 20 : 30 + Math.random() * 40;
+            setTimeout(typeNext, delay);
+          } else {
+            // Hide cursor after a few seconds when finished
+            setTimeout(() => cursor.style.display = 'none', 3000);
+          }
         }
-        i++;
-        // Randomize typing speed for realism (30ms - 70ms)
-        const delay = token === ' ' ? 20 : 30 + Math.random() * 40;
-        setTimeout(typeNext, delay);
-      } else {
-        // Hide cursor after a few seconds when finished
-        setTimeout(() => cursor.style.display = 'none', 3000);
+        
+        // Start typing after a brief delay
+        setTimeout(typeNext, 300);
+        
+        // Stop observing this element once it starts typing
+        obs.unobserve(el);
       }
-    }
-    
-    // Start typing after a brief delay
-    setTimeout(typeNext, 300);
-  });
+    });
+  }, { threshold: 0.5 }); // Trigger when 50% visible
+
+  elements.forEach(el => observer.observe(el));
 }
 
 // Run immediately before Three.js
