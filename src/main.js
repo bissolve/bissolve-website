@@ -1,3 +1,50 @@
+// ── Split Text Reveal (Antigravity Style) ─────────────────
+function initSplitText() {
+  const elements = document.querySelectorAll('.split-text-reveal');
+  elements.forEach((el, index) => {
+    // Determine a base delay based on the element's order or custom attribute
+    const baseDelay = parseFloat(el.getAttribute('data-delay')) || 0;
+    
+    // Get the HTML content, but we need to split only text nodes to preserve <br>
+    const textNodes = Array.from(el.childNodes);
+    el.innerHTML = ''; // clear original
+    
+    let charIndex = 0;
+    textNodes.forEach(node => {
+      if (node.nodeName === 'BR') {
+        el.appendChild(document.createElement('br'));
+      } else if (node.nodeType === 3) { // Text node
+        const chars = node.textContent.split('');
+        chars.forEach(char => {
+          if (char === ' ') {
+            el.appendChild(document.createTextNode(' '));
+          } else {
+            const mask = document.createElement('span');
+            mask.className = 'char-mask';
+            
+            const slide = document.createElement('span');
+            slide.className = 'char-slide';
+            slide.textContent = char;
+            
+            // Stagger each character by 20ms, starting after the base delay
+            const delay = baseDelay + (charIndex * 0.025);
+            slide.style.animationDelay = delay + 's';
+            
+            mask.appendChild(slide);
+            el.appendChild(mask);
+            charIndex++;
+          }
+        });
+      }
+    });
+    // Unhide the original container once set up
+    el.style.opacity = '1';
+  });
+}
+
+// Run immediately before Three.js
+initSplitText();
+
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 

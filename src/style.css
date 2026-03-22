@@ -281,6 +281,23 @@ canvas#particles {
   animation: slideUpReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Character-level stagger reveal (Antigravity style) */
+.char-mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+  vertical-align: bottom;
+}
+.char-slide {
+  display: inline-block;
+  transform: translateY(115%);
+  animation: slideUpReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.split-text-reveal {
+  opacity: 0; /* Hidden until JS splits it to prevent FOUC */
+}
+
 .animate-fade-up {
   opacity: 0;
   animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
