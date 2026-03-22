@@ -267,6 +267,39 @@ canvas#particles {
   letter-spacing: 0.01em;
 }
 
+/* Intro Animations */
+.text-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.text-slide {
+  display: block;
+  transform: translateY(115%);
+  animation: slideUpReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.15s; }
+.delay-2 { animation-delay: 0.3s; }
+.delay-3 { animation-delay: 0.45s; }
+
+@keyframes slideUpReveal {
+  0% { transform: translateY(115%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
 /* Hero action buttons */
 .hero-actions {
   display: flex;
